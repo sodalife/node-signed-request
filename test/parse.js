@@ -1,10 +1,12 @@
-import fs from 'fs'
 import test from 'ava'
+import fixture from './helpers/fixture'
 
 import { parse } from '..'
 
-let fixture = (filename) => fs.readFileSync(`${__dirname}/fixtures/${filename}`, 'utf8')
-
 test('parse signed_request', (t) => {
-  t.deepEqual(parse(fixture('signed_request.txt'), fixture('secret.txt')), JSON.parse(fixture('payload.json')))
+  t.deepEqual(parse(fixture('sample/signed_request.txt'), fixture('sample/secret.txt')), JSON.parse(fixture('sample/payload.json')))
+})
+
+test('parse signed_request of facebook', (t) => {
+  t.deepEqual(parse(fixture('facebook/signed_request.txt'), fixture('facebook/secret.txt'), 'ascii'), JSON.parse(fixture('facebook/payload.json')))
 })

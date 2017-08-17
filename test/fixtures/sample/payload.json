@@ -1,0 +1,7 @@
+{
+  "algorithm": "HMAC-SHA256",
+  "order": {
+    "id": "ORDER_ID.ORDER_ID.ORDER_ID.ORDER_ID",
+    "price": 43.10
+  }
+}
