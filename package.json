@@ -12,7 +12,9 @@
   ],
   "author": "yelo",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "base64-url": "^1.3.3"
+  },
   "devDependencies": {
     "ava": "^0.22.0"
   }

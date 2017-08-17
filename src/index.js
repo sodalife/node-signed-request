@@ -1,26 +1,23 @@
 var crypto = require('crypto')
-var base64url = require('./base64url')
+var base64url = require('base64-url')
 
-function sign (text, secret, encoding) {
-  return crypto.createHmac('sha256', secret).update(text).digest().toString(encoding || 'utf8')
+function sign (text, secret) {
+  return base64url.escape(crypto.createHmac('sha256', secret).update(text).digest('base64'))
 }
 
-exports.parse = function parse (signedRequest, secret, encoding) {
-  var fragments = signedRequest.split('.', 2)
-
-  // decode the data
-  var signature = base64url.decode(fragments[0], encoding)
+exports.parse = function parse (request, secret) {
+  var fragments = request.split('.', 2)
 
   // confirm the signature
-  if (sign(fragments[1], secret, encoding) !== signature) {
+  if (sign(fragments[1], secret) !== fragments[0]) {
     throw new Error('Bad Signed JSON signature!');
   }
 
-  return JSON.parse(base64url.decode(fragments[1]), encoding)
+  return JSON.parse(base64url.decode(fragments[1]))
 }
 
-exports.stringify = function stringify (data, secret, encoding) {
-  var payload = base64url.encode(JSON.stringify(data), encoding)
-  var signature = sign(payload, secret, encoding)
-  return [base64url.encode(signature, encoding), payload].join('.')
+exports.stringify = function stringify (data, secret) {
+  var payload = base64url.encode(JSON.stringify(data))
+  var signature = sign(payload, secret, 'base64')
+  return [signature, payload].join('.')
 }
