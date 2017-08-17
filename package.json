@@ -1,0 +1,21 @@
+{
+  "name": "@sodalife/signed-request",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src",
+  "scripts": {
+    "test": "ava"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "author": "yelo",
+  "license": "MIT",
+  "dependencies": {
+    "base64-url": "^1.3.3"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0"
+  }
+}
