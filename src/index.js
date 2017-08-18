@@ -10,7 +10,7 @@ exports.parse = function parse (request, secret) {
 
   // confirm the signature
   if (sign(fragments[1], secret) !== fragments[0]) {
-    throw new Error('Bad Signed JSON signature!');
+    throw new Error('Bad Signed JSON signature!')
   }
 
   return JSON.parse(base64url.decode(fragments[1]))
